@@ -1,6 +1,7 @@
-package e11test;
+package e26test;
 
-import org.example.e11.E11StringConcatenation;
+
+import org.example.e26.E26TemperatureCheckerIfConditions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,10 +9,9 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class E11StringConcatTester {
-
+class E26TemperatureCheckerIfConditionsTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -27,16 +27,14 @@ class E11StringConcatTester {
     }
 
     @Test
-    void testStringConcatenation() {
-        E11StringConcatenation.main(new String[]{});
-        String expectedOutput = "syntaxtechs.com" + System.lineSeparator();
+    void testWarmTemperature() {
+        // Simulate the program with a temperature that should result in "It's warm outside."
+        E26TemperatureCheckerIfConditions.main(new String[]{});
+        String expectedOutput = "It's warm outside." + System.lineSeparator();
 
         String failureMessage = "The output does not match the expected values.\n" +
-                "Please ensure that your program creates a variable with the value 'syntax',\n" +
-                "creates a variable with the value 'techs.com', and prints them concatenated.";
+                "Please ensure that your program checks the temperature and prints the correct message.";
 
         assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
-
-
 }

@@ -1,6 +1,7 @@
-package e11test;
+package e27test;
 
-import org.example.e11.E11StringConcatenation;
+
+import org.example.e27.E27GradeCalculatorElseIf;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,11 +9,9 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class E11StringConcatTester {
-
-
+class E27GradeCalculatorElseIfTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
@@ -27,16 +26,11 @@ class E11StringConcatTester {
     }
 
     @Test
-    void testStringConcatenation() {
-        E11StringConcatenation.main(new String[]{});
-        String expectedOutput = "syntaxtechs.com" + System.lineSeparator();
-
-        String failureMessage = "The output does not match the expected values.\n" +
-                "Please ensure that your program creates a variable with the value 'syntax',\n" +
-                "creates a variable with the value 'techs.com', and prints them concatenated.";
-
+    void testBGrade() {
+        E27GradeCalculatorElseIf.main(new String[]{});
+        String expectedOutput = "Your grade is: B" + System.lineSeparator();
+        String failureMessage = "The output does not match the expected grade.\n" +
+                "Please ensure that your program calculates and prints the correct grade.";
         assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
-
-
 }

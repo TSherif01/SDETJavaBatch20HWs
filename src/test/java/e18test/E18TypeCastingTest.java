@@ -1,6 +1,6 @@
-package e11test;
+package e18test;
 
-import org.example.e11.E11StringConcatenation;
+import org.example.e18.E18ShoppingCartRoundingTypeCasting;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,10 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class E11StringConcatTester {
-
+class E18ShoppingCartRoundingTypeCastingTester {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -27,16 +26,14 @@ class E11StringConcatTester {
     }
 
     @Test
-    void testStringConcatenation() {
-        E11StringConcatenation.main(new String[]{});
-        String expectedOutput = "syntaxtechs.com" + System.lineSeparator();
+    void testShoppingCartRounding() {
+        E18ShoppingCartRoundingTypeCasting.main(new String[]{});
+        String expectedOutput = "The original total cost is $54.73" + System.lineSeparator() +
+                "The rounded total cost is $54" + System.lineSeparator();
 
         String failureMessage = "The output does not match the expected values.\n" +
-                "Please ensure that your program creates a variable with the value 'syntax',\n" +
-                "creates a variable with the value 'techs.com', and prints them concatenated.";
+                "Please ensure that your program declares the variables 'item1', 'item2', and 'item3', calculates the total cost, performs type casting correctly, and prints the results as specified.";
 
         assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
-
-
 }
