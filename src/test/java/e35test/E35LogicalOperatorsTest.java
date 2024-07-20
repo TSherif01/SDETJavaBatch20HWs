@@ -1,4 +1,4 @@
-package e34test;
+package e35test;
 
 import org.example.e35.E35LogicalOperators;
 import org.junit.jupiter.api.AfterEach;
@@ -12,7 +12,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class E35LoanEligibilityCheckerTest {
+class E35LogicalOperatorsTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -30,22 +30,7 @@ class E35LoanEligibilityCheckerTest {
     }
 
     @Test
-    void testLoanEligibilityNotEligible() {
-        String simulatedInput = "true\n550\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-
-        E35LogicalOperators.main(new String[]{});
-        String expectedOutput = "Do you need a loan? (true/false)" + System.lineSeparator() +
-                "What is your credit score?" + System.lineSeparator() +
-                "The eligibility is Not eligible" + System.lineSeparator();
-
-        String failureMessage = "The output does not match the expected values for credit score below 600.";
-
-        assertEquals(expectedOutput, outContent.toString(), failureMessage);
-    }
-
-    @Test
-    void testLoanEligibilityMaybeEligible() {
+    void testMaybeEligible() {
         String simulatedInput = "true\n650\n";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
@@ -54,13 +39,28 @@ class E35LoanEligibilityCheckerTest {
                 "What is your credit score?" + System.lineSeparator() +
                 "The eligibility is Maybe eligible" + System.lineSeparator();
 
-        String failureMessage = "The output does not match the expected values for credit score between 600 and 700.";
+        String failureMessage = "The output does not match the expected values for Maybe eligible.";
 
         assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
 
     @Test
-    void testLoanEligibilityEligible() {
+    void testNotEligible() {
+        String simulatedInput = "true\n500\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        E35LogicalOperators.main(new String[]{});
+        String expectedOutput = "Do you need a loan? (true/false)" + System.lineSeparator() +
+                "What is your credit score?" + System.lineSeparator() +
+                "The eligibility is Not eligible" + System.lineSeparator();
+
+        String failureMessage = "The output does not match the expected values for Not eligible.";
+
+        assertEquals(expectedOutput, outContent.toString(), failureMessage);
+    }
+
+    @Test
+    void testEligible() {
         String simulatedInput = "true\n750\n";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
@@ -69,13 +69,13 @@ class E35LoanEligibilityCheckerTest {
                 "What is your credit score?" + System.lineSeparator() +
                 "The eligibility is Eligible" + System.lineSeparator();
 
-        String failureMessage = "The output does not match the expected values for credit score between 701 and 800.";
+        String failureMessage = "The output does not match the expected values for Eligible.";
 
         assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
 
     @Test
-    void testLoanEligibilityDefinitelyEligible() {
+    void testDefinitelyEligible() {
         String simulatedInput = "true\n850\n";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
@@ -84,13 +84,13 @@ class E35LoanEligibilityCheckerTest {
                 "What is your credit score?" + System.lineSeparator() +
                 "The eligibility is Definitely eligible" + System.lineSeparator();
 
-        String failureMessage = "The output does not match the expected values for credit score above 800.";
+        String failureMessage = "The output does not match the expected values for Definitely eligible.";
 
         assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
 
     @Test
-    void testLoanEligibilityUnknown() {
+    void testUnknownEligibility() {
         String simulatedInput = "false\n";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
@@ -98,7 +98,7 @@ class E35LoanEligibilityCheckerTest {
         String expectedOutput = "Do you need a loan? (true/false)" + System.lineSeparator() +
                 "The eligibility is Unknown" + System.lineSeparator();
 
-        String failureMessage = "The output does not match the expected values when no loan is needed.";
+        String failureMessage = "The output does not match the expected values for Unknown eligibility.";
 
         assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
