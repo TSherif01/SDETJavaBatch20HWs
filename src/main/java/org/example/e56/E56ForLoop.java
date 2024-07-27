@@ -5,7 +5,7 @@ public class E56ForLoop {
 
         for (int i = 2; i<=14; i++) {
             if (i%2==0)
-            System.out.println(i);
+                System.out.println(i);
         }
     }
 }
